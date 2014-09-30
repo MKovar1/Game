@@ -31,7 +31,7 @@ public class Game extends GameEngine {
         });
 
         cubes = new ArrayList<>();
-        player = new Rectangle(200, 200, WIDTH, WIDTH);
+        player = new Rectangle(200, 200, WIDTH, HEIGHT);
         setSize(GAME_WIDTH, GAME_HEIGHT);
         offscreen = createImage(GAME_WIDTH, GAME_HEIGHT);
         bufferGraphics = offscreen.getGraphics();

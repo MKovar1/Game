@@ -15,6 +15,7 @@ public class GameEngine extends Applet implements Runnable {
     final int MOVEPX = 10;
     final int SPEED = 90;
     final int WIDTH = 50;
+    final int HEIGHT = WIDTH;
 
     final Random random = new Random();
 
@@ -30,7 +31,7 @@ public class GameEngine extends Applet implements Runnable {
         for (int i = 0; true; i++) {
             if (i % (100 - SPEED) == 0) {
                 i = 0;
-                cubes.add(new Rectangle(GAME_WIDTH - WIDTH, random.nextInt(GAME_HEIGHT - WIDTH), WIDTH, WIDTH));
+                cubes.add(new Rectangle(GAME_WIDTH - WIDTH, random.nextInt(GAME_HEIGHT - HEIGHT), WIDTH, HEIGHT));
             }
             for (Rectangle cube : cubes) {
                 cube.x -= MOVEPX;
