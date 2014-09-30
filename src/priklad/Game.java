@@ -1,15 +1,18 @@
 package priklad;
-
+ 
 import java.awt.*;
+
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.*;
-
+ 
 public class Game extends GameEngine {
-
+ 
     @Override
     public void init() {
-        /*
+       
         addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -21,29 +24,28 @@ public class Game extends GameEngine {
                 }
             }
         });
-        */
-
+       
         addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseMoved(MouseEvent e) {
-                player.y = e.getY() - player.height / 2;
+                player.y = e.getY() - player.height/2;
             }
         });
-
-        cubes = new ArrayList<>();
-        player = new Rectangle(200, 200, WIDTH, HEIGHT);
+ 
+        cubes = new ArrayList<Rectangle>();
+        player = new Rectangle(200, 200, WIDTH, WIDTH);
         setSize(GAME_WIDTH, GAME_HEIGHT);
         offScreen = createImage(GAME_WIDTH, GAME_HEIGHT);
         bufferGraphics = offScreen.getGraphics();
         Thread th = new Thread(this);
         th.start();
     }
-
+ 
     @Override
     public void update(Graphics g) {
         paint(g);
     }
-
+ 
     @Override
     public void paint(Graphics g) {
         bufferGraphics.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
@@ -51,10 +53,12 @@ public class Game extends GameEngine {
         bufferGraphics.setColor(Color.BLUE);
         bufferGraphics.fillRect(player.x, player.y, player.width, player.height);
         bufferGraphics.setColor(original);
-
+ 
         for (Rectangle cube : cubes) {
             bufferGraphics.fillRect(cube.x, cube.y, cube.width, cube.height);
         }
         g.drawImage(offScreen, 0, 0, this);
     }
+ 
+ 
 }
