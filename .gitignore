@@ -26,7 +26,8 @@ $RECYCLE.BIN/
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -41,3 +42,15 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# IntelliJ IDEA project files
+.idea
+*.iml
+
+# Eclipse Project files
+.classpath
+.project
+.settings
+
+# Output Folder
+bin
