@@ -15,9 +15,9 @@ public class Game extends GameEngine {
             public void keyPressed(KeyEvent e) {
                 super.keyPressed(e);
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    player.y -= MOVEPX*2;
+                    player.y -= MOVE_PX*2;
                 } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    player.y += MOVEPX*2;
+                    player.y += MOVE_PX*2;
                 }
             }
         });
@@ -33,8 +33,8 @@ public class Game extends GameEngine {
         cubes = new ArrayList<>();
         player = new Rectangle(200, 200, WIDTH, HEIGHT);
         setSize(GAME_WIDTH, GAME_HEIGHT);
-        offscreen = createImage(GAME_WIDTH, GAME_HEIGHT);
-        bufferGraphics = offscreen.getGraphics();
+        offScreen = createImage(GAME_WIDTH, GAME_HEIGHT);
+        bufferGraphics = offScreen.getGraphics();
         Thread th = new Thread(this);
         th.start();
     }
@@ -55,8 +55,6 @@ public class Game extends GameEngine {
         for (Rectangle cube : cubes) {
             bufferGraphics.fillRect(cube.x, cube.y, cube.width, cube.height);
         }
-        g.drawImage(offscreen, 0, 0, this);
+        g.drawImage(offScreen, 0, 0, this);
     }
-
-
 }

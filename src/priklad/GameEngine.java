@@ -9,10 +9,10 @@ import java.util.List;
 public class GameEngine extends Applet implements Runnable {
 
     Graphics bufferGraphics;
-    Image offscreen;
-    int highscore;
+    Image offScreen;
+    private int highScore;
 
-    final int MOVEPX = 10;
+    final int MOVE_PX = 10;
     final int SPEED = 90;
     final int WIDTH = 50;
     final int HEIGHT = WIDTH;
@@ -34,10 +34,10 @@ public class GameEngine extends Applet implements Runnable {
                 cubes.add(new Rectangle(GAME_WIDTH - WIDTH, random.nextInt(GAME_HEIGHT - HEIGHT), WIDTH, HEIGHT));
             }
             for (Rectangle cube : cubes) {
-                cube.x -= MOVEPX;
+                cube.x -= MOVE_PX;
                 if (cube.x + WIDTH < 0) {
                     removeCubes.add(cube);
-                    highscore++;
+                    highScore++;
                 }
             }
             cubes.removeAll(removeCubes);
@@ -58,13 +58,11 @@ public class GameEngine extends Applet implements Runnable {
     private void redraw() {
         if (isColliding()) {
             bufferGraphics.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
-            bufferGraphics.drawString("Game Over! Your highscore is " + highscore, 200, 200);
-            getGraphics().drawImage(offscreen, 0, 0, this);
-
+            bufferGraphics.drawString("Game Over! Your highscore is " + highScore, 200, 200);
+            getGraphics().drawImage(offScreen, 0, 0, this);
             sleep(2000);
             System.exit(0);
         }
-
         repaint();
         sleep(20);
     }
