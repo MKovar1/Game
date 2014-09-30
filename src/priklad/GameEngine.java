@@ -1,63 +1,56 @@
 package priklad;
- 
+
 import java.applet.Applet;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.List;
- 
-public class GameEngine extends Applet implements Runnable {
-	 
-	
 
-	 Graphics bufferGraphics;
+public class GameEngine extends Applet implements Runnable {
+
+    Graphics bufferGraphics;
     Image offscreen;
-    int highscore; 
-     
+    int highscore;
+
     final int MOVEPX = 10;
     final int SPEED = 90;
     final int WIDTH = 50;
- 
+
     final Random random = new Random();
-    
-   
- 
+
     final static int GAME_WIDTH = 720;
     final static int GAME_HEIGHT = 720;
- 
+
     public List<Rectangle> cubes;
     public Rectangle player;
+
     @Override
     public void run() {
-        List<Rectangle> removeCubes = new ArrayList<Rectangle>();
+        List<Rectangle> removeCubes = new ArrayList<>();
         for (int i = 0; true; i++) {
-            if (i % (100-SPEED) == 0) {
+            if (i % (100 - SPEED) == 0) {
                 i = 0;
-                cubes.add(new Rectangle(GAME_WIDTH-WIDTH, random.nextInt(GAME_HEIGHT-WIDTH), WIDTH, WIDTH));
+                cubes.add(new Rectangle(GAME_WIDTH - WIDTH, random.nextInt(GAME_HEIGHT - WIDTH), WIDTH, WIDTH));
             }
             for (Rectangle cube : cubes) {
-                cube.x-=MOVEPX;
-                if (cube.x+WIDTH < 0) {
+                cube.x -= MOVEPX;
+                if (cube.x + WIDTH < 0) {
                     removeCubes.add(cube);
-          
+
                 }
-               
-                for(highscore = 0 ; highscore > 1000;){
-                	highscore++;
-                	redraw();
-                	
+
+                for (highscore = 0; highscore > 1000; ) {
+                    highscore++;
+                    redraw();
                 }
-                
             }
             cubes.removeAll(removeCubes);
             removeCubes.clear();
             redraw();
-          
-            	
         }
     }
-    
- 
+
+
     private void sleep(int ms) {
         try {
             Thread.sleep(ms);
@@ -71,22 +64,22 @@ public class GameEngine extends Applet implements Runnable {
             bufferGraphics.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
             bufferGraphics.drawString("Game Over! Your highscore is " + highscore, 200, 200);
             getGraphics().drawImage(offscreen, 0, 0, this);
-            
+
             sleep(2000);
             System.exit(0);
         }
- 
+
         repaint();
         sleep(20);
     }
- 
+
     private boolean isColliding() {
         for (Rectangle cube : cubes) {
-        	 if (player.intersects(cube)) {
-                 return true;
+            if (player.intersects(cube)) {
+                return true;
             }
         }
         return false;
     }
-    
+
 }
