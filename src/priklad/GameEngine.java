@@ -37,12 +37,7 @@ public class GameEngine extends Applet implements Runnable {
                 cube.x -= MOVEPX;
                 if (cube.x + WIDTH < 0) {
                     removeCubes.add(cube);
-
-                }
-
-                for (highscore = 0; highscore > 1000; ) {
                     highscore++;
-                    redraw();
                 }
             }
             cubes.removeAll(removeCubes);
